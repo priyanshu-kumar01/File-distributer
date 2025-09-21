@@ -14,7 +14,7 @@ connectDB();
 
 // Middlewares
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: "https://file-distribute.onrender.com",
   credentials: true,
 }));
 app.use(express.json())

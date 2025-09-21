@@ -13,7 +13,7 @@ const UploadCSV = () => {
         const token = localStorage.getItem('token'); // get JWT from login
         if (!token) return alert('Please login first to fetch agents');
 
-        const res = await fetch('http://localhost:5000/api/agent/list', {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/agent/list`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

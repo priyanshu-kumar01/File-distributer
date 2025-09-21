@@ -16,7 +16,7 @@ const AuthForm = () => {
     e.preventDefault();
 
     // choose endpoint based on mode
-    const endpoint = isLogin ? 'http://localhost:5000/api/admin/login': 'http://localhost:5000/api/admin/register';
+    const endpoint = isLogin ? `${process.env.REACT_APP_API_URL}/api/admin/login`: `${process.env.REACT_APP_API_URL}/api/admin/register`;
 
     // build request body
     const body = isLogin ? { email, password } : { name, email, password };

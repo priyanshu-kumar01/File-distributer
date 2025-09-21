@@ -22,7 +22,7 @@ app.use(express.json())
 
 // Dash route
 
-app.get("/",(req,res)=>{res.send("WORKING ROUTE")})
+app.get("/",(req,res)=>{res.send("WORKING Fine ")})
 app.use("/api/admin", adminRoutes)
 app.use("/api/agent", agentRoute);
 

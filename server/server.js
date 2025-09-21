@@ -14,7 +14,7 @@ connectDB();
 
 // Middlewares
 app.use(cors({
-  origin: "https://file-distribute.onrender.com"
+  origin: "http://localhost:5173"
 }));
 app.use(express.json())
 

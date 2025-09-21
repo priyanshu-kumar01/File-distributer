@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 
 const Agents = () => {
@@ -7,16 +9,20 @@ const Agents = () => {
   const [password, setPassword] = useState('');
   const [agentList, setAgentList] = useState([]);
 
+  const token = localStorage.getItem('token'); // JWT from login
+
   // Fetch all agents on component mount
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/agent/list', {
+        const res = await fetch(`https://backend-dis.onrender.com/api/agent/list`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
         });
+
         const data = await res.json();
         if (data.success) {
           setAgentList(data.agents); // backend should return { success: true, agents: [...] }
@@ -30,12 +36,12 @@ const Agents = () => {
     };
 
     fetchAgents();
-  }, []);
+  }, [token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint = 'http://localhost:5000/api/agent/add';
+    const endpoint = `https://backend-dis.onrender.com/api/agent/add`;
 
     try {
       const res = await fetch(endpoint, {
@@ -50,7 +56,6 @@ const Agents = () => {
       const data = await res.json();
 
       if (data.success) {
-        // Add new agent to local state to update the list
         setAgentList([...agentList, { name, email, mobile }]);
         setName('');
         setEmail('');

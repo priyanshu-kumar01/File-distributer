@@ -12,39 +12,79 @@ const AuthForm = () => {
 
   const navigate = useNavigate();
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   // choose endpoint based on mode
+  //   const endpoint = isLogin ? `http://localhost:5000/api/admin/login`: `http://localhost:5000/api/admin/register`;
+
+  //   // build request body
+  //   const body = isLogin ? { email, password } : { name, email, password };
+
+  //   try {
+  //     const res = await fetch(endpoint, {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(body),
+  //     });
+
+  //     const data = await res.json();
+  //     console.log('API response:', data);
+
+  //     if (data.success || data.succes) {
+  //       // store token in localStorage
+  //       localStorage.setItem('token', data.token);
+
+  //       // redirect to dashboard
+  //       navigate('/');
+  //     } else {
+  //       alert(data.message || 'Something went wrong');
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert('Network error');
+  //   }
+  // };
+
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // choose endpoint based on mode
-    const endpoint = isLogin ? `${process.env.REACT_APP_API_URL}/api/admin/login`: `${process.env.REACT_APP_API_URL}/api/admin/register`;
+  // choose endpoint based on mode
+  const endpoint = isLogin
+    ? `https://backend-dis.onrender.com/api/admin/login`
+    : `https://backend-dis.onrender.com/api/admin/register`;
 
-    // build request body
-    const body = isLogin ? { email, password } : { name, email, password };
+  // build request body
+  const body = isLogin ? { email, password } : { name, email, password };
 
-    try {
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
 
-      const data = await res.json();
-      console.log('API response:', data);
+    // parse response safely
+    const text = await res.text();
+    const data = text ? JSON.parse(text) : {};
 
-      if (data.success || data.succes) {
-        // store token in localStorage
-        localStorage.setItem('token', data.token);
+    console.log('API response:', data);
 
-        // redirect to dashboard
-        navigate('/');
-      } else {
-        alert(data.message || 'Something went wrong');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Network error');
+    if (data.success || data.succes) {
+      // store token in localStorage
+      localStorage.setItem('token', data.token);
+
+      // redirect to dashboard
+      navigate('/');
+    } else {
+      alert(data.message || 'Something went wrong');
     }
-  };
+  } catch (err) {
+    console.error(err);
+    alert('Network or JSON parsing error');
+  }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black flex items-center justify-center px-4">

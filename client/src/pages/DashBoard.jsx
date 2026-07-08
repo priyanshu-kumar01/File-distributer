@@ -17,7 +17,7 @@ const Dashboard = () => {
       <div className="absolute w-full h-full bg-gray-900/60 -z-10"></div>
 
       <h1 className="text-4xl md:text-5xl font-extrabold mb-12 text-center drop-shadow-lg">
-        Admin Dashboard
+        Admin Dashboard... 
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-4xl px-4">

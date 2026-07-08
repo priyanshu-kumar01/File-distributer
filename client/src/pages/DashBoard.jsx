@@ -27,7 +27,7 @@ const Dashboard = () => {
               Manage Agents
             </h2>
             <p className="text-gray-200 text-center">
-              Create new agents and view existing agents.
+              Create new agents and view existing agents....
             </p>
           </div>
         </Link>

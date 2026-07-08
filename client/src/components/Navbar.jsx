@@ -31,7 +31,7 @@ const Navbar = () => {
                 onClick={handleLogout}
                 className="hover:text-cyan-400 transition duration-300"
               >
-                Logout
+                LOGOUT:
               </button>
             ) : (
               <Link to="/login" className="hover:text-cyan-400 transition duration-300">

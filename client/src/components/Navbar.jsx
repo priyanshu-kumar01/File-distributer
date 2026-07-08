@@ -22,7 +22,7 @@ const Navbar = () => {
           <div className="flex space-x-6">
             {token && (
               <Link to="/" className="hover:text-cyan-400 transition duration-300">
-                Dashboard
+                DASHBoard
               </Link>
             )}
 

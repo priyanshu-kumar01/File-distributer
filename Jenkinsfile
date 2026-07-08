@@ -14,20 +14,22 @@ node {
 
     stage('Deploy to EC2') {
         sh """
-            sudo mkdir -p ${appDir}
-            sudo chown -R jenkins:jenkins ${appDir}
+    sudo mkdir -p ${appDir}
+    sudo chown -R jenkins:jenkins ${appDir}
 
-            rsync -av --delete \
-                --exclude='.git' \
-                --exclude='node_modules' \
-                ./ ${appDir}/
+    rsync -av --delete \
+        --exclude='.git' \
+        --exclude='node_modules' \
+        ./ ${appDir}/
 
-            cd ${appDir}/client
+    cd ${appDir}/client
 
-            npm install
-            npm run build
-            sudo fuser -k 3000/tcp || true 
-            npm run start
-        """
+    npm install
+    npm run build
+
+    sudo fuser -k 4173/tcp || true
+
+    nohup npm run preview -- --host 0.0.0.0 --port 4173 > preview.log 2>&1 &
+    """
     }
 }
